@@ -44,9 +44,9 @@ Note : Ansible nous permettra d'automatiser la configuration de nos futurs nœud
 
 🏗️ 2. VM Provisioning --- Création des Machines Virtuelles
 Goal: Deploy the nodes for the security lab --- Objectif : Déployer les nœuds pour le laboratoire de sécurité.
-Machine		OS		Role					RAM
-Control-Plane	Debian/Kali	K3s Master & Cilium			4GB+
-Target-Win	Windows 10/11	Attack Target / Cible d'attaque		4GB
+Machine			OS				Role							RAM
+Control-Plane	Debian/Kali		K3s Master & Cilium				4GB+
+Target-Win		Windows 10/11	Attack Target / Cible d'attaque	4GB
 
 Important Points --- Points importants:
  - Ensure all VMs are on the same NAT/Internal network --- S'assurer que toutes les VMs sont sur le même réseau NAT/Interne.
@@ -55,14 +55,14 @@ Important Points --- Points importants:
 
 
 🛡️ 3. Goal: Install K3s without default networking and replace it with Cilium (eBPF) --- Objectif : Installer K3s sans réseau par défaut et le remplacer par Cilium (eBPF).
- # a. Install K3s without Flannel/Kube-proxy --- Installer K3s sans Flannel ni Kube-proxy
-  sudo curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--flannel-backend=none --disable-network-policy --disable traefik" sh -
- # b. Export the cluster configuration --- Exporter la configuration du cluster
-  export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
- # 3. Install Cilium CLI & deploy the agent --- Installer le CLI Cilium et déployer l'agent
-  sudo -E cilium install --set k8sServiceHost=127.0.0.1 --set k8sServicePort=6443
- # 4. Enable Hubble for visibility --- Activer Hubble pour la visibilité
-  sudo -E cilium hubble enable --ui
+	 # a. Install K3s without Flannel/Kube-proxy --- Installer K3s sans Flannel ni Kube-proxy
+  		sudo curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--flannel-backend=none --disable-network-policy --disable traefik" sh -
+	 # b. Export the cluster configuration --- Exporter la configuration du cluster
+ 		 export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+	 # c. Install Cilium CLI & deploy the agent --- Installer le CLI Cilium et déployer l'agent
+  		sudo -E cilium install --set k8sServiceHost=127.0.0.1 --set k8sServicePort=6443
+	 # d. Enable Hubble for visibility --- Activer Hubble pour la visibilité
+  		sudo -E cilium hubble enable --ui
 
 
 
@@ -88,3 +88,8 @@ Conclusion: Visual Verification --- Vérification visuelle
   Infrastructure : Functional K3s cluster with Cilium --- Cluster K3s fonctionnel avec Cilium.
   Observability: Hubble configured and used to validate real-time streams --- Observabilité : Hubble configuré et utilisé pour valider les flux en temps réel.
   Micro-segmented Security: Implementation of a strict Zero-Trust perimeter (L3/L4 and L7) --- Sécurité Micro-segmentée : Mise en place d'un périmètre Zero-Trust strict (L3/L4 et L7).
+
+Source		Destination			Protocole	Action
+Pod Tracer	Google / Internet	HTTP (80)	DROPPED ❌
+Pod Tracer	VM Windows (129)	HTTP GET	ALLOWED ✅
+Pod Tracer	VM Windows (129)	HTTP POST	REJECTED (L7) 🛡️
