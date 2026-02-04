@@ -88,8 +88,13 @@ Conclusion: Visual Verification --- Vérification visuelle
   Infrastructure : Functional K3s cluster with Cilium --- Cluster K3s fonctionnel avec Cilium.
   Observability: Hubble configured and used to validate real-time streams --- Observabilité : Hubble configuré et utilisé pour valider les flux en temps réel.
   Micro-segmented Security: Implementation of a strict Zero-Trust perimeter (L3/L4 and L7) --- Sécurité Micro-segmentée : Mise en place d'un périmètre Zero-Trust strict (L3/L4 et L7).
+<<<<<<< HEAD
 
 Source		Destination			Protocole	Action
+=======
+  
+Source		Destination		Protocole	Action
+>>>>>>> 800b8b4 (Add inventory example and update documentation)
 Pod Tracer	Google / Internet	HTTP (80)	DROPPED ❌
 Pod Tracer	VM Windows (129)	HTTP GET	ALLOWED ✅
 Pod Tracer	VM Windows (129)	HTTP POST	REJECTED (L7) 🛡️
