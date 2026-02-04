@@ -1,0 +1,12 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "block-external-world"
+spec:
+  endpointSelector:
+    matchLabels:
+      run: tracer
+  egress:
+  - toEntities:
+    - cluster
+    - kube-apiserver

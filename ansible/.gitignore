@@ -1,0 +1,37 @@
+###############################################################################
+# SSH Private Keys (NEVER PUSH) | Clés privées SSH (NE JAMAIS POUSSER)
+###############################################################################
+# These files contain sensitive access credentials.
+# Ces fichiers contiennent des identifiants d'accès sensibles.
+id_ed25519
+id_rsa
+*.pem
+*.key
+
+###############################################################################
+# Sensitive Kubernetes Config | Fichiers de configuration Kubernetes sensibles
+###############################################################################
+# Prevents leaking cluster access tokens and endpoints.
+# Évite la fuite des jetons d'accès et des points d'entrée du cluster.
+k3s.yaml
+.kube/
+kubeconfig
+
+###############################################################################
+# Ansible & Secrets | Ansible et secrets
+###############################################################################
+# Avoid pushing plain-text passwords or local inventory details.
+# Évite de pousser des mots de passe en clair ou des détails d'inventaire local.
+.vault_pass
+*.log
+ansible.log
+inventory.ini
+
+###############################################################################
+# OS & Environment specific | Divers et fichiers système
+###############################################################################
+# Local system files, dependencies, and cache.
+# Fichiers système locaux, dépendances et cache.
+.DS_Store
+node_modules/
+__pycache__/
