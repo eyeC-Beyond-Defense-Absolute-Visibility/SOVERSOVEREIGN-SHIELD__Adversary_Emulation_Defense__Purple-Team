@@ -1,6 +1,33 @@
-🛡️ Sovereign Shield - Phase 1: The Foundations
+🛡️ Sovereign Shield
+
+
+Phase 1: The Foundations
+
+
+
+Project structure --- Structure du projet
+
+
+
+└── ansible/
+    ├── scripts/           # For your .yml playbooks and bash scripts --- Pour tes playbooks .yml et scripts bash
+    │   ├── deploy_shield.yml
+    │   └── enable_hubble.yml
+    ├── policies/          # For your Cilium .yaml rule files --- Pour tes fichiers de règles Cilium .yaml
+    │   └── shield-policy.yaml
+    └── inventory.ini      # To list your target machines --- Pour lister tes machines cibles
+
+
+
+What you need to get started --- Ce dont vous avez besoin pour commencer: 
+ - Kali, Debian and Windows (NAT in NAT mode --- En mode NAT)
+ - Ansible
+
+
 
 This document describes the setup of the core infrastructure and the eBPF firewall. --- Ce document décrit la mise en place de l'infrastructure de base et du pare-feu eBPF.
+
+
 
 📋 1. Ansible Setup --- Préparation & Installation d'Ansible
 Goal: Install the orchestration tool on your control machine (Kali) --- Objectif : Installer l'outil d'orchestration sur votre machine de contrôle (Kali).
@@ -41,20 +68,10 @@ Important Points --- Points importants:
 
 🧪 4. Testing the Shield --- Test du Bouclier
 Goal: Verify that the policy effectively blocks unauthorized traffic --- Objectif : Vérifier que la politique bloque efficacement le trafic non autorisé.
- Step 1: Create a test pod --- Créer un pod de test: sudo k3s kubectl run tracer --image=curlimages/curl -- sh -c "while true; do curl -sL google.com > /dev/null; sleep 2; done"
- Step 2: Apply the Security Policy --- Appliquer la politique de sécurité [Create shield-policy.yaml:YAML] (content of file --- contenu du fichier):
-	apiVersion: "cilium.io/v2"
-	kind: CiliumNetworkPolicy
-	metadata:
-  	 name: "block-external-world"
-	spec:
-  	 endpointSelector:
-    	  matchLabels:
-      	   run: tracer
-  	egress:
-  	- toEntities: [cluster, kube-apiserver]
-
-Apply it --- L'appliquer: sudo k3s kubectl apply -f shield-policy.yaml
+ Step 1: Create a test pod --- Créer un pod de test: 
+ 	sudo k3s kubectl run tracer --image=curlimages/curl -- sh -c "while true; do curl -sL google.com > /dev/null; sleep 2; done"
+ Step 2: Apply the Security Policy --- Appliquer la politique de sécurité
+ 	sudo k3s kubectl apply -f shield-policy.yaml
 
 
 
@@ -64,3 +81,10 @@ Conclusion: Visual Verification --- Vérification visuelle
 	---
 	Résultat attendu : Lignes rouges dans l'interface Hubble, statut "dropped" pour le trafic vers 'world'.
 
+
+
+
+🏁 End of Phase 1 -- Fin de la Phase 1 : récapitulatif
+  Infrastructure : Functional K3s cluster with Cilium --- Cluster K3s fonctionnel avec Cilium.
+  Observability: Hubble configured and used to validate real-time streams --- Observabilité : Hubble configuré et utilisé pour valider les flux en temps réel.
+  Micro-segmented Security: Implementation of a strict Zero-Trust perimeter (L3/L4 and L7) --- Sécurité Micro-segmentée : Mise en place d'un périmètre Zero-Trust strict (L3/L4 et L7).
