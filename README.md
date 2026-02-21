@@ -74,7 +74,7 @@ We follow the **NIST SP 800-61** standard for incident handling. Sovereign-Shiel
 
 ### 2. Installation
 ```bash
-git clone https://github.com/your-username/Sovereign-Shield.git
+git clone https://github.com/OBadolo/Sovereign-Shield.git
 cd Sovereign-Shield
 chmod +x setup.sh
 ./setup.sh
@@ -93,8 +93,8 @@ chmod +x setup.sh
 * [x] Phase 1: Network Segmentation & Multi-OS Deployment.
 * [x] Phase 2: Shield Deployment (K3s + Cilium eBPF).
 * [x] Phase 3: Active Defense (L7 Identity-Aware Policies).
-* [ ] Phase 4: Advanced Emulation (C2 Channel simulation).
-* [ ] Phase 5: Governance & Automated Reporting.
+* [x] Phase 4: Advanced Emulation (C2 Channel simulation).
+* [x] Phase 5: Governance & Automated Reporting.
 
 ---
 
