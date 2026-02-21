@@ -1,0 +1,8 @@
+---
+- name: "Hardening & K3s Setup"
+  hosts: k8s_nodes
+  become: yes
+  
+  roles:
+    - os_hardening
+    - k3s_install
