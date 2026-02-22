@@ -1,0 +1,29 @@
+{
+  "_comment": "The configuration was expanded to include different OS families and their specific roles within the LAN/WAN segments.",
+  "project_name": "Sovereign-Shield-v2",
+  "version": "1.1",
+  "author": "O’djuma Badolo",
+  
+  "infrastructure": {
+    "control_node": { "os": "Debian 12", "ip": "XX.X.X.X", "role": "Shield-Gateway" },
+    "threat_actor": { "os": "Kali Linux", "ip": "XX.X.X.XXX", "segment": "WAN" },
+    "protected_nodes": [
+      { "name": "web-srv-ubuntu", "os": "Ubuntu Server", "ip": "XXX.XXX.X.XX" },
+      { "name": "db-srv-alma", "os": "AlmaLinux", "ip": "XXX.XXX.X.XX" },
+      { "name": "win-ad-2019", "os": "Windows Server 2019", "ip": "XXX.XXX.X.XX" },
+      { "name": "win-workstation-11", "os": "Windows 11", "ip": "XXX.XXX.X.XX" }
+    ],
+    "vulnerable_targets": [
+      { "name": "metasploitable3", "os": "Ubuntu/Windows", "ip": "XXX.XXX.X.XX" }
+    ]
+  },
+
+  "ansible_config": {
+    "inventory_path": "ansible/inventory/v2-inventory.ini",
+    "playbooks": {
+      "deploy": "ansible/playbooks/deploy_shield.yml",
+      "isolate": "ansible/playbooks/incident-response/isolate_node.yml",
+      "evidence": "ansible/playbooks/incident-response/gather_evidence.yml"
+    }
+  }
+}

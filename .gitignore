@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ###############################################################################
 # SSH Private Keys (NEVER PUSH) | Clés privées SSH (NE JAMAIS POUSSER)
 ###############################################################################
@@ -35,3 +36,46 @@ inventory.ini
 .DS_Store
 node_modules/
 __pycache__/
+=======
+# --- eyeC Sovereign-Shield GitIgnore ---
+
+# 1. C++ Compilation Artifacts
+# Avoidint pushing binary files or build folders
+build/
+bin/
+*.o
+*.out
+*.exe
+
+# 2. Configuration & Secrets (CRITICAL)
+# Users must use their own config based on config.json.example
+config.json
+*.env
+*.pem
+*.key
+inventory.ini
+
+# 3. Ansible & Automation
+# Temporary files created by Ansible
+*.retry
+.ansible/
+fact_cache/
+
+# 4. Logs & Telemetry
+# Local logs should stay local
+logs/
+*.log
+
+# 5. OS Generated Files
+.DS_Store
+Thumbs.db
+
+# 6. IDE Specific Folders
+.vscode/
+.idea/
+
+
+# 7. Documents users won't need
+docs/
+
+>>>>>>> main
