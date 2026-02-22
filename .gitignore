@@ -21,7 +21,6 @@ inventory.ini
 *.retry
 .ansible/
 fact_cache/
-vault_pass.txt
 
 # 4. Logs & Telemetry
 # Local logs should stay local
@@ -31,7 +30,6 @@ logs/
 # 5. OS Generated Files
 .DS_Store
 Thumbs.db
-.env
 
 # 6. IDE Specific Folders
 .vscode/
@@ -40,3 +38,4 @@ Thumbs.db
 
 # 7. Documents users won't need
 docs/
+

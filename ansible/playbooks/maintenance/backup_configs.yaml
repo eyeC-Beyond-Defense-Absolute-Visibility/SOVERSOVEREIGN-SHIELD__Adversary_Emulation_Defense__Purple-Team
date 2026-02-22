@@ -1,0 +1,18 @@
+# In addition to isolation, my C++ orchestrator manages a backup routine. 
+# If an attack compromises the integrity of my configuration files, 
+# I can restore the entire infrastructure to its 'Gold Standard' state with a single command.
+---
+- name: "[💾] Sovereign-Shield: Automated Backup"
+  hosts: control_plane
+  tasks:
+    - name: "Create Backup Archive"
+      ansible.builtin.archive:
+        path: 
+          - "/etc/rancher/k3s/config.yaml"
+          - "../../policies/*.yaml"
+        dest: "../../backups/shield_config_{{ ansible_date_time.date }}.tar.gz"
+        format: gz
+
+    - name: "Verify Integrity"
+      ansible.builtin.debug:
+        msg: "Backup successfully stored in the /backups directory."

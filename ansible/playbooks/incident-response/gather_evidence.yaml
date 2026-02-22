@@ -1,0 +1,55 @@
+---
+# ==============================================================================
+# Sovereign-Shield v2: Forensic Evidence Collector
+# Objective: Capture volatile data from a compromised node before isolation.
+# ==============================================================================
+
+- name: "[🔍] Sovereign-Shield: Forensic Data Collection"
+  hosts: "{{ target }}"
+  become: yes
+  vars:
+    evidence_dir: "/tmp/sovereign_evidence_{{ ansible_date_time.epoch }}"
+    win_evidence_dir: "C:\\Windows\\Temp\\sovereign_evidence_{{ ansible_date_time.epoch }}"
+
+  tasks:
+
+    # --- LINUX FORENSICS (Debian, Alma, Ubuntu) ---
+    - name: "Linux: Create Evidence Directory"
+      ansible.builtin.file:
+        path: "{{ evidence_dir }}"
+        state: directory
+        mode: '0700'
+      when: ansible_os_family != "Windows"
+
+    - name: "Linux: Capture Volatile Network & Process Data"
+      ansible.builtin.shell: |
+        ss -tunap > {{ evidence_dir }}/network_connections.txt
+        ps auxf > {{ evidence_dir }}/process_list.txt
+        last -n 20 > {{ evidence_dir }}/recent_logins.txt
+      when: ansible_os_family != "Windows"
+
+    # --- WINDOWS FORENSICS (Server 2019, Win 11) ---
+    - name: "Windows: Create Evidence Directory"
+      ansible.windows.win_file:
+        path: "{{ win_evidence_dir }}"
+        state: directory
+      when: ansible_os_family == "Windows"
+
+    - name: "Windows: Capture Volatile Data via PowerShell"
+      ansible.windows.win_powershell:
+        script: |
+          Get-NetTCPConnection | Out-File -FilePath "{{ win_evidence_dir }}\network.txt"
+          Get-Process | Out-File -FilePath "{{ win_evidence_dir }}\processes.txt"
+          Get-EventLog -LogName Security -Newest 20 | Out-File -FilePath "{{ win_evidence_dir }}\security_logs.txt"
+      when: ansible_os_family == "Windows"
+
+    # --- DATA EXFILTRATION (To Control Node) ---
+    - name: "Consolidation: Fetch evidence to Sovereign-Shield Control Plane"
+      ansible.builtin.fetch:
+        src: "{{ (ansible_os_family == 'Windows') | ternary(win_evidence_dir + '\\network.txt', evidence_dir + '/network_connections.txt') }}"
+        dest: "./evidence/{{ inventory_hostname }}/"
+        flat: yes
+
+    - name: "Status: Forensics phase completed"
+      ansible.builtin.debug:
+        msg: "Evidence successfully captured in ./evidence/{{ inventory_hostname }}/"

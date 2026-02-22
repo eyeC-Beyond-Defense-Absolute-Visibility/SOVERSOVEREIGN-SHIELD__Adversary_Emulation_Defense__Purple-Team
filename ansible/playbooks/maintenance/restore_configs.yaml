@@ -1,0 +1,37 @@
+---
+# ==============================================================================
+# Sovereign-Shield v2: Infrastructure Restoration
+# Objective: Restore security policies and cluster configs from a tar.gz archive.
+# ==============================================================================
+
+- name: "[🔄] Sovereign-Shield: Automated Restoration"
+  hosts: control_plane
+  become: yes
+  vars:
+    # The variable 'backup_file' is passed from the C++ Orchestrator
+    backup_path: "../../backups/{{ backup_file }}"
+
+  tasks:
+    - name: "Pre-check: Verify if backup file exists"
+      ansible.builtin.stat:
+        path: "{{ backup_path }}"
+      register: backup_stat
+
+    - name: "Safety: Halt if backup file is missing"
+      ansible.builtin.fail:
+        msg: "Target backup file {{ backup_file }} not found in backups directory!"
+      when: not backup_stat.stat.exists
+
+    - name: "Restoration: Extracting policies and configurations"
+      ansible.builtin.unarchive:
+        src: "{{ backup_path }}"
+        dest: "/" # Extrait à la racine car l'archive contient les chemins relatifs
+        remote_src: yes
+
+    - name: "Validation: Reloading Cilium Policies"
+      ansible.builtin.shell: "cilium policy import ../../policies/*.yaml"
+      ignore_errors: yes # Avoid failing if some policies are already present
+
+    - name: "Status: Restoration phase completed"
+      ansible.builtin.debug:
+        msg: "Infrastructure successfully restored to state: {{ backup_file }}"

@@ -1,0 +1,42 @@
+# Project: Sovereign-Shield (eyeC)
+# Objective: eBPF-based micro-segmentation for Kubernetes
+# Description: This policy enforces Least Privilege by only allowing DNS and internal API traffic.
+
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "sovereign-shield-core-policy"
+  namespace: default
+spec:
+  endpointSelector:
+    matchLabels:
+      role: backend # Targets all pods with the 'backend' label
+  
+  ingress:
+    # 1. Allow internal traffic from the frontend only on port 8080
+    - fromEndpoints:
+        - matchLabels:
+            role: frontend
+      toPorts:
+        - ports:
+            - port: "8080"
+              protocol: TCP
+
+  egress:
+    # 2. Allow DNS resolution (essential for service discovery)
+    - toEndpoints:
+        - matchLabels:
+            "k8s:io.kubernetes.pod.namespace": kube-system
+            k8s-app: kube-dns
+      toPorts:
+        - ports:
+            - port: "53"
+              protocol: UDP
+            - port: "53"
+              protocol: TCP
+          rules:
+            dns:
+              - matchPattern: "*.svc.cluster.local"
+
+    # 3. Deny all other egress traffic (L3/L4 Isolation)
+    # This prevents data exfiltration and reverse shells to external IPs.
