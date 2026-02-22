@@ -153,3 +153,25 @@ GET requests allowed, POST requests blocked (eBPF proxy).
 Selective HTTP method filtering prevents data exfiltration.
 
 <img src="https://github.com/user-attachments/assets/05d433a2-06ca-4bad-a697-3ff814dc857d" />
+
+
+## 🔜 What comes next?
+
+### Version 1.1 — **Complexify · Not Crazyfy**
+
+The next iteration introduces:
+- multi-node environments
+- explicit threat actors
+
+Genesis is the **ground truth**.
+Version 2 is where things become serious.
+
+# End of Version 1.0: GENESIS
+
+---
+
+## 👤 Author
+
+**O'djuma Badolo**  
+Web Developer | Cybersecurity graduate | DevSecOps Enthusiast  
+> *"Building secure systems by thinking like the storm."*
