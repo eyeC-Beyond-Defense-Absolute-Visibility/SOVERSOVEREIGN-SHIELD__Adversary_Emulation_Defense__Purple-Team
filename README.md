@@ -11,8 +11,8 @@ This phase describes the setup of the **core infrastructure** and an **eBPF-base
 ## 📁 Project Structure
 
 ```
-.
-  ├── ansible/            # 🤖 Automation & IaC
+
+├── ansible/            # 🤖 Automation & IaC
 │   ├── policies/       # Cilium L3/L4/L7 security rules
 │   │   └── shield-policy.yaml
 │   └── scripts/        # Deployment & Configuration playbooks
