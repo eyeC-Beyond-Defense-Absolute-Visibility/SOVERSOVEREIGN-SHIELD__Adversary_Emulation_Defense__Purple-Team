@@ -7,6 +7,23 @@
 ![Category](https://img.shields.io/badge/Project-eyeC_Triplets-blueviolet?style=flat-square)
 ![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)
 
+
+
+![eBPF](https://img.shields.io/badge/eBPF-Enforcement-orange?logo=ebpf&logoColor=white) ![Cilium](https://img.shields.io/badge/Cilium-blue?logo=cilium&logoColor=white) ![Hubble](https://img.shields.io/badge/Hubble-Observability-607078?logo=cilium&logoColor=white) ![Tetragon](https://img.shields.io/badge/Tetragon-Security-00b3a4?logo=cilium&logoColor=white) ![K3s](https://img.shields.io/badge/Kubernetes-K3s-326ce5?logo=kubernetes&logoColor=white)
+
+![Ansible](https://img.shields.io/badge/Ansible-EE0000?logo=ansible&logoColor=white) ![Kali Linux](https://img.shields.io/badge/Kali_Linux-557C94?logo=kali-linux&logoColor=white) ![Debian](https://img.shields.io/badge/Debian-A81D33?logo=debian&logoColor=white) ![Windows](https://img.shields.io/badge/Windows-0078D6?logo=windows&logoColor=white)
+
+![Project](https://img.shields.io/badge/Triplets-eyeC-blueviolet) ![Phase](https://img.shields.io/badge/Phase-I_Genesis-green) ![License](https://img.shields.io/badge/License-MIT-yellow)
+
+# 🛡️ Sovereign Shield: Genesis
+
+> **Sovereign Shield** is one of the **[eyeC Triplets](https://github.com/eyeC-DevSecOps-project)**.
+> 
+> *"Signals are cheap. Decisions are earned."* — **Behavioral Detection Lab**
+
+![eBPF](https://img.shields.io/badge/eBPF-Enforcement-orange?logo=ebpf&logoColor=white) ![Cilium](https://img.shields.io/badge/Cilium-blue?logo=cilium&logoColor=white) ![Hubble](https://img.shields.io/badge/Hubble-Observability-607078?logo=cilium&logoColor=white) ![K3s](https://img.shields.io/badge/Kubernetes-K3s-326ce5?logo=kubernetes&logoColor=white) ![Ansible](https://img.shields.io/badge/Ansible-EE0000?logo=ansible&logoColor=white) ![Kali Linux](https://img.shields.io/badge/Kali_Linux-557C94?logo=kali-linux&logoColor=white)
+    
+
 # 🛡️ Sovereign Shield: Genesis
 
 > ## Note
