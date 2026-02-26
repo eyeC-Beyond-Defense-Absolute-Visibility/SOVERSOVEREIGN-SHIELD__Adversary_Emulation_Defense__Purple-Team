@@ -1,3 +1,12 @@
+![eBPF](https://img.shields.io/badge/eBPF-Enforcement-orange?style=for-the-badge&logo=ebpf)
+![Cilium](https://img.shields.io/badge/Cilium-1.14+-blue?style=for-the-badge&logo=cilium)
+![K3s](https://img.shields.io/badge/K3s-Lightweight_K8s-FFC107?style=for-the-badge&logo=k3s&logoColor=black)
+![Ansible](https://img.shields.io/badge/Ansible-Automation-EE0000?style=for-the-badge&logo=ansible)
+
+![Status](https://img.shields.io/badge/Phase-I_Genesis-green?style=flat-square)
+![Category](https://img.shields.io/badge/Project-eyeC_Triplets-blueviolet?style=flat-square)
+![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)
+
 # 🛡️ Sovereign Shield: Genesis
 
 > ## Note
